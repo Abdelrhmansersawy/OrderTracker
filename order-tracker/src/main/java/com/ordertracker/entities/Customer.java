@@ -1,9 +1,6 @@
 package com.ordertracker.entities;
 
-import com.ordertracker.entities.order.Order;
 import jakarta.persistence.*;
-
-import java.util.List;
 
 @Entity
 @Table(name = "customers")
@@ -24,9 +21,6 @@ public class Customer {
     
     @Column(nullable = false)
     private String password;
-    
-    @OneToMany(mappedBy = "customer", cascade = CascadeType.PERSIST)
-    private List<Order> orders;
     
     public Customer() {}
     
@@ -70,11 +64,11 @@ public class Customer {
         this.password = password;
     }
     
-    public List<Order> getOrders() {
-        return orders;
-    }
-    
-    public void setOrders(List<Order> orders) {
-        this.orders = orders;
+    @Override
+    public String toString() {
+        return "{ name: " + name +
+            ", email: " + email +
+            ", phoneNumber: " + phoneNumber +
+            ", password: " + password + " }";
     }
 }

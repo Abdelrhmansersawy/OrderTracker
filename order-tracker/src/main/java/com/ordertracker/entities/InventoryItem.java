@@ -1,13 +1,11 @@
 package com.ordertracker.entities;
 
-import com.ordertracker.entities.order.Order;
+import com.ordertracker.entities.product.Product;
 import jakarta.persistence.*;
 
-import java.util.List;
-
 @Entity
-@Table(name = "inventory_products")
-public class InventoryProduct {
+@Table(name = "inventory_items")
+public class InventoryItem {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,20 +15,18 @@ public class InventoryProduct {
     @JoinColumn(name = "inventory_id", nullable = false)
     private Inventory inventory;
     
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "product_id", nullable = false)
     private Product product;
     
-    @OneToMany(mappedBy = "inventoryProduct")
-    private List<Order> orders;
-    
     @Column(nullable = false)
-    private Integer quantity;
+    private Integer stockQuantity;
     
     @Column(nullable = false)
     private Double price;
     
-    public InventoryProduct() {}
+    public InventoryItem() {
+    }
     
     public Integer getId() {
         return id;
@@ -56,20 +52,12 @@ public class InventoryProduct {
         this.product = product;
     }
     
-    public List<Order> getOrders() {
-        return orders;
+    public Integer getStockQuantity() {
+        return stockQuantity;
     }
     
-    public void setOrders(List<Order> orders) {
-        this.orders = orders;
-    }
-    
-    public Integer getQuantity() {
-        return quantity;
-    }
-    
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
+    public void setStockQuantity(Integer stockQuantity) {
+        this.stockQuantity = stockQuantity;
     }
     
     public Double getPrice() {

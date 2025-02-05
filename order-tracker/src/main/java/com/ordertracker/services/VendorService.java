@@ -16,7 +16,23 @@ public class VendorService {
         this.vendorRepository = vendorRepository;
     }
     
-    public List<Vendor> findAll() {
+    public List<Vendor> getAllVendors() {
         return vendorRepository.findAll();
+    }
+    
+    public Vendor getVendor(int vendorId) {
+        return vendorRepository.findById(vendorId).orElse(null);
+    }
+    
+    public Vendor addVendor(Vendor vendor) {
+        return vendorRepository.save(vendor);
+    }
+    
+    public Vendor updateVendor(int vendorId, Vendor vendor) {
+        if (vendorRepository.existsById(vendorId)) {
+            vendor.setId(vendorId);
+            return vendorRepository.save(vendor);
+        }
+        return null;
     }
 }

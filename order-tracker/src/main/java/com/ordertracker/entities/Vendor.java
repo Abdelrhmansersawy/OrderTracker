@@ -2,8 +2,6 @@ package com.ordertracker.entities;
 
 import jakarta.persistence.*;
 
-import java.util.List;
-
 @Entity
 @Table(name = "vendors")
 public class Vendor {
@@ -16,10 +14,7 @@ public class Vendor {
     private String name;
     
     @Column(nullable = false)
-    private String contactInfo;
-    
-    @OneToMany(mappedBy = "vendor", cascade = CascadeType.PERSIST)
-    private List<Inventory> inventories;
+    private String phoneNumber;
     
     public Vendor() {}
     
@@ -39,19 +34,17 @@ public class Vendor {
         this.name = name;
     }
     
-    public String getContactInfo() {
-        return contactInfo;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
     
-    public void setContactInfo(String contactInfo) {
-        this.contactInfo = contactInfo;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
     
-    public List<Inventory> getInventories() {
-        return inventories;
-    }
-    
-    public void setInventories(List<Inventory> inventories) {
-        this.inventories = inventories;
+    @Override
+    public String toString() {
+        return "{ name: " + name +
+            ", phoneNumber: " + phoneNumber + " }";
     }
 }

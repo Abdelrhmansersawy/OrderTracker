@@ -3,15 +3,11 @@ package com.ordertracker.rest;
 import com.ordertracker.entities.Customer;
 import com.ordertracker.services.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/customers")
 public class CustomerController {
     private final CustomerService customerService;
     
@@ -20,13 +16,41 @@ public class CustomerController {
         this.customerService = customerService;
     }
     
-    @GetMapping("/all")
-    public List<Customer> findAll() {
-        return customerService.findAll();
+    @GetMapping("/customers")
+    public List<Customer> getAllCustomers() {
+        return customerService.getAllCustomers();
     }
     
-    @GetMapping("/{id}")
-    public Customer findById(@PathVariable int id) {
-        return customerService.findById(id);
+    @GetMapping("/customers/{customerId}")
+    public Customer getCustomer(@PathVariable int customerId) {
+        Customer customer =
+            customerService.getCustomer(customerId);
+        
+        if (customer == null) {
+            throw new RuntimeException(
+                "Customer with id - " + customerId + " not found");
+        }
+        
+        return customer;
+    }
+    
+    @PostMapping("/customers")
+    public Customer addCustomer(@RequestBody Customer customer) {
+        // System.out.println("Customer: " + customer + " added.");
+        return customerService.addCustomer(customer);
+    }
+    
+    @PutMapping("/customers/{customerId}")
+    public Customer updateCustomer(@PathVariable int customerId, @RequestBody Customer customer) {
+        Customer updatedCustomer =
+            customerService.updateCustomer(customerId, customer);
+        
+        if (updatedCustomer == null) {
+            throw new RuntimeException(
+                "Customer with id - " + customerId + " not found");
+        }
+        
+        // System.out.println("Customer: " + customer + " updated.");
+        return updatedCustomer;
     }
 }

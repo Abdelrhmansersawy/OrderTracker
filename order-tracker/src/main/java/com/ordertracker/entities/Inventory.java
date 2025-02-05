@@ -2,8 +2,6 @@ package com.ordertracker.entities;
 
 import jakarta.persistence.*;
 
-import java.util.List;
-
 @Entity
 @Table(name = "inventories")
 public class Inventory {
@@ -12,12 +10,9 @@ public class Inventory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "vendor_id", nullable = false)
     private Vendor vendor;
-    
-    @OneToMany(mappedBy = "inventory")
-    private List<InventoryProduct> inventoryProducts;
     
     public Inventory() {}
     
@@ -35,13 +30,5 @@ public class Inventory {
     
     public void setVendor(Vendor vendor) {
         this.vendor = vendor;
-    }
-    
-    public List<InventoryProduct> getInventoryProducts() {
-        return inventoryProducts;
-    }
-    
-    public void setInventoryProducts(List<InventoryProduct> inventoryProducts) {
-        this.inventoryProducts = inventoryProducts;
     }
 }

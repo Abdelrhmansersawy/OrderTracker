@@ -1,6 +1,6 @@
 package com.ordertracker.services;
 
-import com.ordertracker.entities.Product;
+import com.ordertracker.entities.product.Product;
 import com.ordertracker.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

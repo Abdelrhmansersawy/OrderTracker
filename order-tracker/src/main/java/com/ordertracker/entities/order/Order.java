@@ -1,7 +1,6 @@
 package com.ordertracker.entities.order;
 
 import com.ordertracker.entities.Customer;
-import com.ordertracker.entities.InventoryProduct;
 import jakarta.persistence.*;
 
 @Entity
@@ -12,16 +11,11 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer id;
     
+    private String name;
+    
     @ManyToOne
     @JoinColumn(name = "customer_id", nullable = false)
     private Customer customer;
-    
-    @ManyToOne
-    @JoinColumn(name = "inventory_product_id", nullable = false)
-    private InventoryProduct inventoryProduct;
-    
-    @Column(nullable = false)
-    private Integer quantity;
     
     @Column(nullable = false)
     private Double totalPrice;
@@ -29,7 +23,8 @@ public class Order {
     @Column(nullable = false)
     private OrderState state;
     
-    public Order() {}
+    public Order() {
+    }
     
     public Integer getId() {
         return id;
@@ -39,28 +34,20 @@ public class Order {
         this.id = id;
     }
     
+    public String getName() {
+        return name;
+    }
+    
+    public void setName(String name) {
+        this.name = name;
+    }
+    
     public Customer getCustomer() {
         return customer;
     }
     
     public void setCustomer(Customer customer) {
         this.customer = customer;
-    }
-    
-    public InventoryProduct getInventoryProduct() {
-        return inventoryProduct;
-    }
-    
-    public void setInventoryProduct(InventoryProduct inventoryProduct) {
-        this.inventoryProduct = inventoryProduct;
-    }
-    
-    public Integer getQuantity() {
-        return quantity;
-    }
-    
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
     }
     
     public Double getTotalPrice() {

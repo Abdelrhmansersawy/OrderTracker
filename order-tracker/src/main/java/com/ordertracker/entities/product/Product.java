@@ -1,8 +1,6 @@
-package com.ordertracker.entities;
+package com.ordertracker.entities.product;
 
 import jakarta.persistence.*;
-
-import java.util.List;
 
 @Entity
 @Table(name = "products")
@@ -12,16 +10,16 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String name;
     
     @Column(length = 500)
     private String description;
     
-    @OneToMany(mappedBy = "product")
-    private List<InventoryProduct> productInventories;
+    private ProductCategory category;
     
-    public Product() {}
+    public Product() {
+    }
     
     public Integer getId() {
         return id;
@@ -47,11 +45,11 @@ public class Product {
         this.description = description;
     }
     
-    public List<InventoryProduct> getProductInventories() {
-        return productInventories;
+    public ProductCategory getCategory() {
+        return category;
     }
     
-    public void setProductInventories(List<InventoryProduct> productInventories) {
-        this.productInventories = productInventories;
+    public void setCategory(ProductCategory category) {
+        this.category = category;
     }
 }
