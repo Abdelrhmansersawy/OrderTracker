@@ -2,7 +2,6 @@ package com.ordertracker.rest;
 
 import com.ordertracker.entities.Customer;
 import com.ordertracker.services.CustomerService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,7 +10,6 @@ import java.util.List;
 public class CustomerController {
     private final CustomerService customerService;
     
-    @Autowired
     public CustomerController(CustomerService customerService) {
         this.customerService = customerService;
     }
@@ -23,34 +21,19 @@ public class CustomerController {
     
     @GetMapping("/customers/{customerId}")
     public Customer getCustomer(@PathVariable int customerId) {
-        Customer customer =
-            customerService.getCustomer(customerId);
-        
-        if (customer == null) {
-            throw new RuntimeException(
-                "Customer with id - " + customerId + " not found");
-        }
-        
-        return customer;
+        return customerService.getCustomer(customerId);
     }
     
     @PostMapping("/customers")
     public Customer addCustomer(@RequestBody Customer customer) {
-        // System.out.println("Customer: " + customer + " added.");
         return customerService.addCustomer(customer);
     }
     
-    @PutMapping("/customers/{customerId}")
-    public Customer updateCustomer(@PathVariable int customerId, @RequestBody Customer customer) {
-        Customer updatedCustomer =
-            customerService.updateCustomer(customerId, customer);
-        
-        if (updatedCustomer == null) {
-            throw new RuntimeException(
-                "Customer with id - " + customerId + " not found");
+    @PutMapping("/customers")
+    public Customer updateCustomer(@RequestBody Customer customer) {
+        if (customer.getId() == null) {
+            throw new IllegalArgumentException("Customer id is required for updating");
         }
-        
-        // System.out.println("Customer: " + customer + " updated.");
-        return updatedCustomer;
+        return customerService.updateCustomer(customer);
     }
 }

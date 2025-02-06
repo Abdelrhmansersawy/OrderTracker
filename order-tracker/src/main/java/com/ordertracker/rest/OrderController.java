@@ -2,7 +2,6 @@ package com.ordertracker.rest;
 
 import com.ordertracker.entities.order.Order;
 import com.ordertracker.services.OrderService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,7 +10,6 @@ import java.util.List;
 public class OrderController {
     private final OrderService orderService;
 
-    @Autowired
     public OrderController(OrderService orderService) {
         this.orderService = orderService;
     }
@@ -47,12 +45,14 @@ public class OrderController {
         return orderService.addOrderForCustomer(customerId, order);
     }
     
-    @PutMapping("/customers/{customerId}/orders/{orderId}")
+    @PutMapping("/customers/{customerId}/orders")
     public Order updateOrderForCustomer(
         @PathVariable int customerId,
-        @RequestBody Order order,
-        @PathVariable int orderId
+        @RequestBody Order order
     ) {
-        return orderService.updateOrderForCustomer(customerId, order, orderId);
+        if (order.getId() == null) {
+            throw new IllegalArgumentException("Order ID is required for updating");
+        }
+        return orderService.updateOrderForCustomer(customerId, order);
     }
 }

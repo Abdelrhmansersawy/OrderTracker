@@ -3,20 +3,20 @@ package com.ordertracker.services;
 import com.ordertracker.entities.Customer;
 import com.ordertracker.entities.order.Order;
 import com.ordertracker.entities.order.OrderState;
+import com.ordertracker.exceptions.CustomerNotFoundException;
+import com.ordertracker.exceptions.OrderMismatchException;
+import com.ordertracker.exceptions.OrderNotFoundException;
 import com.ordertracker.repositories.CustomerRepository;
 import com.ordertracker.repositories.OrderRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class OrderService {
     private final OrderRepository orderRepository;
     private final CustomerRepository customerRepository;
     
-    @Autowired
     public OrderService(
         OrderRepository orderRepository,
         CustomerRepository customerRepository
@@ -25,90 +25,59 @@ public class OrderService {
         this.customerRepository = customerRepository;
     }
     
+    private Customer getCustomer(int customerId) {
+        return customerRepository.findById(customerId)
+            .orElseThrow(() -> new CustomerNotFoundException(
+                "Customer with id - %d not found".formatted(customerId)));
+    }
+    
     public List<Order> getAllOrders() {
         return orderRepository.findAll();
     }
     
     public Order getOrder(int orderId) {
-        Optional<Order> orderOptional = orderRepository.findById(orderId);
-        
-        if (orderOptional.isEmpty()) {
-            throw new RuntimeException(
-                "Order with id - " + orderId + " not found");
-        }
-        
-        return orderOptional.get();
+        return orderRepository.findById(orderId)
+            .orElseThrow(() -> new OrderNotFoundException(
+                "Order with id - %d not found".formatted(orderId)));
     }
     
     public List<Order> getAllOrdersForCustomer(int customerId) {
-        Optional<Customer> customerOptional = customerRepository.findById(customerId);
-        
-        if (customerOptional.isEmpty()) {
-            throw new RuntimeException(
-                "Customer with id - " + customerId + " not found");
-        }
-        
-        return orderRepository.findAllByCustomer(customerOptional.get());
+        return orderRepository.findAllByCustomer(getCustomer(customerId));
     }
     
     public Order getOrderForCustomer(int customerId, int orderId) {
-        Optional<Customer> customerOptional = customerRepository.findById(customerId);
-        Optional<Order> orderOptional = orderRepository.findById(orderId);
+        Customer customer = getCustomer(customerId);
+        Order order = getOrder(orderId);
         
-        if (customerOptional.isEmpty()) {
-            throw new RuntimeException(
-                "Customer with id - " + customerId + " not found");
+        if (!order.getCustomer().getId().equals(customer.getId())) {
+            throw new OrderMismatchException(
+                "Customer with id - %d has no order with id - %d"
+                    .formatted(customerId, orderId));
         }
         
-        if (orderOptional.isEmpty()) {
-            throw new RuntimeException(
-                "Order with id - " + orderId + " not found");
-        }
-        
-        if (orderOptional.get().getCustomer().getId() != customerId) {
-            throw new RuntimeException(
-                "Order with id - " + orderId + " is not for customer with id - " + customerId);
-        }
-        
-        return orderOptional.get();
+        return order;
     }
     
     public Order addOrderForCustomer(int customerId, Order order) {
-        Optional<Customer> customerOptional = customerRepository.findById(customerId);
-        
-        if (customerOptional.isEmpty()) {
-            throw new RuntimeException(
-                "Customer with id - " + customerId + " not found");
-        }
-        
-        order.setCustomer(customerOptional.get());
+        Customer customer = getCustomer(customerId);
+        order.setCustomer(customer);
         order.setTotalPrice(0.0);
         order.setState(OrderState.CREATED);
         
         return orderRepository.save(order);
     }
     
-    public Order updateOrderForCustomer(int customerId, Order order, int orderId) {
-        Optional<Customer> customerOptional = customerRepository.findById(customerId);
-        Optional<Order> orderOptional = orderRepository.findById(orderId);
+    public Order updateOrderForCustomer(int customerId, Order order) {
+        Customer customer = getCustomer(customerId);
+        Order currentOrder = getOrder(order.getId());
         
-        if (customerOptional.isEmpty()) {
-            throw new RuntimeException(
-                "Customer with id - " + customerId + " not found");
+        if (!currentOrder.getCustomer().getId().equals(customerId)) {
+            throw new OrderMismatchException(
+                "Customer with id - %d has no order with id - %d"
+                    .formatted(customerId, order.getId()));
         }
         
-        if (orderOptional.isEmpty()) {
-            throw new RuntimeException(
-                "Order with id - " + orderId + " not found");
-        }
-        
-        if (orderOptional.get().getCustomer().getId() != customerId) {
-            throw new RuntimeException(
-                "Order with id - " + orderId + " is not for customer with id - " + customerId);
-        }
-        
-        order.setId(orderId);
-        order.setCustomer(customerOptional.get());
+        order.setCustomer(customer);
         
         return orderRepository.save(order);
     }
