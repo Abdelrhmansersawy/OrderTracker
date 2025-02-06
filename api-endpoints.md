@@ -80,7 +80,7 @@
   }
   ```
   
-  ### Customer Controller
+### Customer Controller
 
 ##### `GET /customers`
 

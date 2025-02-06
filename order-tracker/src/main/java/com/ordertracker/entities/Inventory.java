@@ -14,6 +14,8 @@ public class Inventory {
     @JoinColumn(name = "vendor_id", nullable = false)
     private Vendor vendor;
     
+    private String location;
+    
     public Inventory() {}
     
     public Integer getId() {
@@ -30,5 +32,13 @@ public class Inventory {
     
     public void setVendor(Vendor vendor) {
         this.vendor = vendor;
+    }
+    
+    public String getLocation() {
+        return location;
+    }
+    
+    public void setLocation(String location) {
+        this.location = location;
     }
 }

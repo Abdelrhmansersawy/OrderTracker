@@ -64,8 +64,10 @@ public class OrderTrackerApplication {
 //
 //			Inventory i1 = new Inventory();
 //			i1.setVendor(v1);
+//			i1.setLocation("Menouf");
 //			Inventory i2 = new Inventory();
 //			i2.setVendor(v2);
+//			i2.setLocation("Shebeen");
 //
 //			i1.setVendor(v1);
 //			i2.setVendor(v2);

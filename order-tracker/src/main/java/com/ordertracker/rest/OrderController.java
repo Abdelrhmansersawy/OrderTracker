@@ -1,7 +1,7 @@
 package com.ordertracker.rest;
 
 import com.ordertracker.entities.order.Order;
-import com.ordertracker.services.OrderService;
+import com.ordertracker.services.order.OrderService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -51,7 +51,7 @@ public class OrderController {
         @RequestBody Order order
     ) {
         if (order.getId() == null) {
-            throw new IllegalArgumentException("Order ID is required for updating");
+            throw new IllegalArgumentException("Order id is required for updating");
         }
         return orderService.updateOrderForCustomer(customerId, order);
     }

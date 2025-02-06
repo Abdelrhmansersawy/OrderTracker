@@ -1,4 +1,4 @@
-package com.ordertracker.services;
+package com.ordertracker.services.order;
 
 import com.ordertracker.entities.order.OrderItem;
 import com.ordertracker.repositories.OrderItemRepository;
