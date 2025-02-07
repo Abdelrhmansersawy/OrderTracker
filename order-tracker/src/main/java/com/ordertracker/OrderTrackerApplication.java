@@ -1,9 +1,12 @@
 package com.ordertracker;
 
-import com.ordertracker.entities.*;
-import com.ordertracker.entities.product.Product;
-import com.ordertracker.entities.product.ProductCategory;
-import com.ordertracker.repositories.*;
+import com.ordertracker.entity.Customer;
+import com.ordertracker.entity.Inventory;
+import com.ordertracker.entity.InventoryItem;
+import com.ordertracker.entity.Vendor;
+import com.ordertracker.entity.product.Product;
+import com.ordertracker.entity.product.ProductCategory;
+import com.ordertracker.repository.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -14,7 +17,7 @@ public class OrderTrackerApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(OrderTrackerApplication.class, args);
 	}
-//
+
 //	@Bean
 //	public CommandLineRunner commandLineRunner(
 //		CustomerRepository customerRepository,
