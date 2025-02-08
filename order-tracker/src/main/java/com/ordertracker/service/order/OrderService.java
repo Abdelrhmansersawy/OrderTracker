@@ -1,8 +1,8 @@
 package com.ordertracker.service.order;
 
-import com.ordertracker.entity.Customer;
-import com.ordertracker.entity.order.Order;
-import com.ordertracker.entity.order.OrderState;
+import com.ordertracker.entities.Customer;
+import com.ordertracker.entities.order.Order;
+import com.ordertracker.entities.order.OrderState;
 import com.ordertracker.exception.EntityNotFoundException;
 import com.ordertracker.exception.OrderMismatchException;
 import com.ordertracker.repository.CustomerRepository;

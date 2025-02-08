@@ -1,11 +1,11 @@
-package com.ordertracker.entity;
+package com.ordertracker.entities;
 
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "customers")
-public class Customer {
-
+@Table(name = "vendors")
+public class Vendor {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -13,16 +13,10 @@ public class Customer {
     @Column(nullable = false)
     private String name;
     
-    @Column(nullable = false, unique = true)
-    private String email;
-    
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String phoneNumber;
     
-    @Column(nullable = false)
-    private String password;
-    
-    public Customer() {}
+    public Vendor() {}
     
     public Integer getId() {
         return id;
@@ -40,14 +34,6 @@ public class Customer {
         this.name = name;
     }
     
-    public String getEmail() {
-        return email;
-    }
-    
-    public void setEmail(String email) {
-        this.email = email;
-    }
-    
     public String getPhoneNumber() {
         return phoneNumber;
     }
@@ -56,19 +42,9 @@ public class Customer {
         this.phoneNumber = phoneNumber;
     }
     
-    public String getPassword() {
-        return password;
-    }
-    
-    public void setPassword(String password) {
-        this.password = password;
-    }
-    
     @Override
     public String toString() {
         return "{ name: " + name +
-            ", email: " + email +
-            ", phoneNumber: " + phoneNumber +
-            ", password: " + password + " }";
+            ", phoneNumber: " + phoneNumber + " }";
     }
 }

@@ -1,4 +1,4 @@
-package com.ordertracker.entity.notification;
+package com.ordertracker.entities.notification;
 
 public enum NotificationStatus {
     PENDING("pending"),

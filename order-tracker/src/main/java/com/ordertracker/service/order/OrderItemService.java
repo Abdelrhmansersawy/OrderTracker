@@ -1,6 +1,6 @@
 package com.ordertracker.service.order;
 
-import com.ordertracker.entity.order.OrderItem;
+import com.ordertracker.entities.order.OrderItem;
 import com.ordertracker.repository.OrderItemRepository;
 import org.springframework.stereotype.Service;
 

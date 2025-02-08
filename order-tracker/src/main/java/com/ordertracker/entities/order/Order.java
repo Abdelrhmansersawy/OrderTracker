@@ -1,6 +1,6 @@
-package com.ordertracker.entity.order;
+package com.ordertracker.entities.order;
 
-import com.ordertracker.entity.Customer;
+import com.ordertracker.entities.Customer;
 import jakarta.persistence.*;
 
 @Entity

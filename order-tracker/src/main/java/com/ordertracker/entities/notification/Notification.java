@@ -1,9 +1,7 @@
-package com.ordertracker.entities.notifications;
+package com.ordertracker.entities.notification;
 
 import com.ordertracker.entities.order.Order;
 import jakarta.persistence.*;
-import org.hibernate.Length;
-import org.springframework.data.domain.Limit;
 
 import java.time.LocalDate;
 

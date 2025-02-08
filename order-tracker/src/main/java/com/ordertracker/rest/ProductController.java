@@ -1,6 +1,6 @@
 package com.ordertracker.rest;
 
-import com.ordertracker.entity.product.Product;
+import com.ordertracker.entities.product.Product;
 import com.ordertracker.service.ProductService;
 import org.springframework.web.bind.annotation.*;
 

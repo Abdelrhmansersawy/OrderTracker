@@ -1,4 +1,4 @@
-package com.ordertracker.entity;
+package com.ordertracker.entities;
 
 import jakarta.persistence.*;
 

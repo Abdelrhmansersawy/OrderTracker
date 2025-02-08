@@ -1,6 +1,6 @@
 package com.ordertracker.service.inventory;
 
-import com.ordertracker.entity.InventoryItem;
+import com.ordertracker.entities.InventoryItem;
 import com.ordertracker.exception.EntityNotFoundException;
 import com.ordertracker.repository.InventoryItemRepository;
 import org.springframework.stereotype.Service;
