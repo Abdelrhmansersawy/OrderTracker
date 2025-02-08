@@ -24,6 +24,7 @@ public class Order {
     private OrderState state;
     
     public Order() {
+
     }
     
     public Integer getId() {
