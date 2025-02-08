@@ -1,7 +1,7 @@
 package com.ordertracker.rest;
 
-import com.ordertracker.entities.InventoryItem;
-import com.ordertracker.services.inventory.InventoryItemService;
+import com.ordertracker.entity.InventoryItem;
+import com.ordertracker.service.inventory.InventoryItemService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,17 +14,17 @@ public class InventoryItemController {
         this.inventoryItemService = inventoryItemService;
     }
     
-    @GetMapping("/items")
+    @GetMapping("/inv-items")
     public List<InventoryItem> getAllItems() {
         return inventoryItemService.getAllItems();
     }
     
-    @GetMapping("/items/{itemId}")
+    @GetMapping("/inv-items/{itemId}")
     public InventoryItem getItem(@PathVariable int itemId) {
         return inventoryItemService.getItem(itemId);
     }
     
-    @PostMapping("/items")
+    @PostMapping("/inv-items")
     public InventoryItem addItem(@RequestBody InventoryItem item) {
         return inventoryItemService.addItem(item);
     }

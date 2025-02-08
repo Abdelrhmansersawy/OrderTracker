@@ -1,9 +1,12 @@
 package com.ordertracker;
 
-import com.ordertracker.entities.*;
-import com.ordertracker.entities.product.Product;
-import com.ordertracker.entities.product.ProductCategory;
-import com.ordertracker.repositories.*;
+import com.ordertracker.entity.Customer;
+import com.ordertracker.entity.Inventory;
+import com.ordertracker.entity.InventoryItem;
+import com.ordertracker.entity.Vendor;
+import com.ordertracker.entity.product.Product;
+import com.ordertracker.entity.product.ProductCategory;
+import com.ordertracker.repository.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -14,24 +17,23 @@ public class OrderTrackerApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(OrderTrackerApplication.class, args);
 	}
-//
-	@Bean
-	public CommandLineRunner commandLineRunner(
-		CustomerRepository customerRepository,
-		InventoryItemRepository inventoryItemRepository,
-		InventoryRepository inventoryRepository,
-		OrderItemRepository orderItemRepository,
-		OrderRepository orderRepository,
-		ProductRepository productRepository,
-		VendorRepository vendorRepository
-	) {
-		return args -> {
-//			Customer c1 = new Customer();
-//			c1.setName("Ahmed");
-//			c1.setEmail("Ahmed@fee.com");
-//			c1.setPassword("ahmed123");
-//			c1.setPhoneNumber("0111213");
 
+//	@Bean
+//	public CommandLineRunner commandLineRunner(
+//		CustomerRepository customerRepository,
+//		InventoryItemRepository inventoryItemRepository,
+//		InventoryRepository inventoryRepository,
+//		OrderItemRepository orderItemRepository,
+//		OrderRepository orderRepository,
+//		ProductRepository productRepository,
+//		VendorRepository vendorRepository
+//	) {
+//		return args -> {
+//			Customer c1 = new Customer();
+//			c1.setName("Ali");
+//			c1.setEmail("ali@fee.com");
+//			c1.setPassword("ali123");
+//			c1.setPhoneNumber("0111");
 //			Customer c2 = new Customer();
 //			c2.setName("Hani");
 //			c2.setEmail("hani@fee.com");
@@ -106,6 +108,6 @@ public class OrderTrackerApplication {
 //			inventoryItemRepository.save(ii1);
 //			inventoryItemRepository.save(ii2);
 //			inventoryItemRepository.save(ii3);
-		};
-	}
+//		};
+//	}
 }
