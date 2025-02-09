@@ -4,21 +4,25 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-@Entity
-@Table(name = "vendors")
-@Getter
-@Setter
-public class Vendor extends User{
-    
+@Entity @Table(name = "vendors")
+@Getter @Setter
+public class Vendor{
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "location")
-    private String location;
+    @Column(nullable = false)
+    private String name;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "inventory_id", nullable = false)
-    private Inventory inventory;
+    @Column(nullable = false,unique = true)
+    private String email;
+
+    @Column(nullable = false, unique = true)
+    private String address;
+
+    @Column(nullable = false)
+    private String phoneNumber;
+
     public Vendor() {}
 }
