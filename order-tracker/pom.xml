@@ -15,7 +15,7 @@
 	<artifactId>order-tracker</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>order-tracker</name>
-	<description>A Spring Boot-based Order Notification System managing order lifecycle (Created, Paid, Processed, Shipped, Delivered, Completed) with real-time customer notifications. Includes inventory management for stock tracking and updates.</description>
+	<description>A Spring Boot-based Order Notification System managing order lifecycle (Created, Paid, Processed, Shipped, Delivered, Completed) with real-time customer notification. Includes inventory management for stock tracking and updates.</description>
 	<url/>
 
 	<licenses>
@@ -63,6 +63,12 @@
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<scope>provided</scope>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-mail -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-mail</artifactId>
+			<version>3.4.4</version>
 		</dependency>
 
 	</dependencies>
